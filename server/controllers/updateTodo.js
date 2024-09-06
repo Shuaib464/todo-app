@@ -5,12 +5,12 @@ exports.updateTodo = async (req, res) => {
         // extract todo id from params
         const id = req.params.id;
         // extract title-desc from req body
-        const {title, description} = req.body;
+        const {title} = req.body;
 
         // find todo by id and update in db
         const updatedTodo = await Todo.findByIdAndUpdate(
                                             id,
-                                            {title, description, updatedAt: Date.now()},
+                                            {title},
                                             {new : true}
         )
         if (!updatedTodo) {
