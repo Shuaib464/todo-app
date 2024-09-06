@@ -5,9 +5,9 @@ exports.createTodo = async (req, res) => {
     
     try {
         // extract title, description from req ki body
-        const {title, description} = req.body;
+        const {title} = req.body;
         //create a new Todo and insert in DB
-        const todo = await Todo.create({title, description});
+        const todo = await Todo.create({title});
         // send success response if todo created
         if(todo) {
             res.status(200).json(
