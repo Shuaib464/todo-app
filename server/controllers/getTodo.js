@@ -5,13 +5,20 @@ exports.getTodos = async (req, res) => {
         const todos = await Todo.find({})
                                 // .then((data) => console.log("getTodo res -> ",data))
                                 // .catch((err) => console.log("getTodo dbfetch error ", err))
-        res.status(200).json(
-            {
+        if(todos.length <= 0) {
+            res.status(404).json({
                 success: true,
-                data: todos,
-                message: 'todo fetched successfully',
-            }
-        )
+                message: 'No Todo found in DB',
+            })     
+        } else {
+            res.status(200).json(
+                {
+                    success: true,
+                    data: todos,
+                    message: 'todo fetched successfully',
+                }
+            )
+        }
     } catch (error) {
         console.log('getTodo error ',error);
         res.status(500).json(
